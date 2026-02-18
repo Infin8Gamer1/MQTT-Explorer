@@ -63,7 +63,8 @@ const mac: builder.CliOptions = {
   armv7l: false,
   arm64: true,
   projectDir: './build/clean',
-  publish: 'always',
+  // Only publish to GitHub when GH_TOKEN is set (e.g. in CI). Local builds skip upload.
+  publish: process.env.GH_TOKEN ? 'always' : 'never',
 }
 
 async function executeBuild() {
